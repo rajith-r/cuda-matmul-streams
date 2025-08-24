@@ -50,7 +50,7 @@
   <rect class="box" x="320" y="310" width="150" height="44"/><text class="txt" x="332" y="336">H2D: A( M1×K )</text>
   <rect class="box" x="482" y="310" width="150" height="44"/><text class="txt" x="494" y="336">H2D: B( K×N1 )</text>
   <rect class="dash" x="644" y="310" width="200" height="44"/><text class="txt" x="656" y="336">Kernel: C11( M1×N1 )</text>
-  <rect class="box" x="856" y="310" width="140" height="44"/><text class="txt" x="868" y="336">D2H: C11</text>
+  <rect class="box" x="856" y="310" width="180" height="44"/><text class="txt" x="868" y="336">D2H: C11 → host</text>
 
   <!-- Footer hint -->
   <text class="txt hint" x="20" y="430">Tip: Each stream runs H2D → compute → D2H for its tile; streams overlap in time.</text>
