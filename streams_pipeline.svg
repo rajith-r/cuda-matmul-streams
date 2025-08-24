@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" font-family="monospace" font-size="14">
+  <!-- Title -->
+  <text x="20" y="30" font-size="20">Pipelined GEMM with 4 CUDA Streams</text>
+  <!-- Time axis -->
+  <line x1="120" y1="50" x2="960" y2="50" stroke="black" stroke-width="1"/>
+  <text x="965" y="55">time →</text>
+
+  <!-- Stream labels -->
+  <text x="20" y="110">Stream 0</text>
+  <text x="20" y="180">Stream 1</text>
+  <text x="20" y="250">Stream 2</text>
+  <text x="20" y="320">Stream 3</text>
+
+  <!-- Legend -->
+  <rect x="120" y="360" width="24" height="16" fill="none" stroke="black"/>
+  <text x="150" y="372">H2D (A,B) copy</text>
+  <rect x="300" y="360" width="24" height="16" fill="none" stroke="black" stroke-dasharray="5,3"/>
+  <text x="330" y="372">Compute (matmul kernel)</text>
+  <rect x="600" y="360" width="24" height="16" fill="none" stroke="black"/>
+  <text x="630" y="372">D2H (C tile) copy</text>
+
+  <!-- Helper function-like blocks (as rectangles) -->
+  <!-- Stream 0 -->
+  <rect x="120" y="90" width="140" height="40" fill="none" stroke="black"/>
+  <text x="130" y="115">H2D: A( M0×K )</text>
+  <rect x="270" y="90" width="140" height="40" fill="none" stroke="black"/>
+  <text x="280" y="115">H2D: B( K×N0 )</text>
+  <rect x="420" y="90" width="180" height="40" fill="none" stroke="black" stroke-dasharray="5,3"/>
+  <text x="430" y="115">Kernel: C00( M0×N0 )</text>
+  <rect x="610" y="90" width="160" height="40" fill="none" stroke="black"/>
+  <text x="620" y="115">D2H: C00 → host</text>
+
+  <!-- Stream 1 (staggered) -->
+  <rect x="200" y="160" width="140" height="40" fill="none" stroke="black"/>
+  <text x="210" y="185">H2D: A( M0×K )</text>
+  <rect x="350" y="160" width="140" height="40" fill="none" stroke="black"/>
+  <text x="360" y="185">H2D: B( K×N1 )</text>
+  <rect x="500" y="160" width="180" height="40" fill="none" stroke="black" stroke-dasharray="5,3"/>
+  <text x="510" y="185">Kernel: C01( M0×N1 )</text>
+  <rect x="690" y="160" width="160" height="40" fill="none" stroke="black"/>
+  <text x="700" y="185">D2H: C01 → host</text>
+
+  <!-- Stream 2 -->
+  <rect x="280" y="230" width="140" height="40" fill="none" stroke="black"/>
+  <text x="290" y="255">H2D: A( M1×K )</text>
+  <rect x="430" y="230" width="140" height="40" fill="none" stroke="black"/>
+  <text x="440" y="255">H2D: B( K×N0 )</text>
+  <rect x="580" y="230" width="180" height="40" fill="none" stroke="black" stroke-dasharray="5,3"/>
+  <text x="590" y="255">Kernel: C10( M1×N0 )</text>
+  <rect x="770" y="230" width="160" height="40" fill="none" stroke="black"/>
+  <text x="780" y="255">D2H: C10 → host</text>
+
+  <!-- Stream 3 -->
+  <rect x="360" y="300" width="140" height="40" fill="none" stroke="black"/>
+  <text x="370" y="325">H2D: A( M1×K )</text>
+  <rect x="510" y="300" width="140" height="40" fill="none" stroke="black"/>
+  <text x="520" y="325">H2D: B( K×N1 )</text>
+  <rect x="660" y="300" width="180" height="40" fill="none" stroke="black" stroke-dasharray="5,3"/>
+  <text x="670" y="325">Kernel: C11( M1×N1 )</text>
+  <rect x="850" y="300" width="120" height="40" fill="none" stroke="black"/>
+  <text x="860" y="325">D2H: C11</text>
+</svg>
